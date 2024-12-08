@@ -16,11 +16,11 @@ Route::middleware('auth', 'verified')->group(function () {
     Route::get('/index', [ProfileController::class, 'index'])->name('profile.index');
     Route::post('/chirps', [ProfileController::class, 'chirps'])->name('chirps.store');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('chirps.destroy');
 });
 
 Route::resource('chirps', ChirpController::class)
-    ->only(['index', 'store', 'edit', 'update'])
+    ->only(['index', 'store', 'edit', 'update', 'destroy'])
     ->middleware(['auth', 'verified']);
 
 require __DIR__.'/auth.php';
