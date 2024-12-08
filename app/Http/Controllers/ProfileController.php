@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
-
+use App\Models\Chirp;
 class ProfileController extends Controller
 {
     /**
@@ -19,6 +19,17 @@ class ProfileController extends Controller
         return view('profile.edit', [
             'user' => $request->user(),
         ]);
+    }
+
+    public function chirps(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'message' => 'required|string|max:255',
+        ]);
+        $chirpsModel= new Chirp();
+        $chirpsModel->message= $validated["message"];
+        $chirpModel->save();
+        return redirect(route('chirps.store'));
     }
      
     public function index(Request $request): View
