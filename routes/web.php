@@ -17,6 +17,8 @@ Route::middleware('auth', 'verified')->group(function () {
     Route::post('/chirps', [ProfileController::class, 'chirps'])->name('chirps.store');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('chirps.destroy');
+    
+
 });
 
 Route::resource('chirps', ChirpController::class)
